@@ -27,6 +27,9 @@ const authRoutes= require('./routes/userRoutes')
 app.use('/api/auth',authRoutes);
 const adminRoutes=require('./routes/adminRoutes')
 app.use('/api/admin',adminRoutes);
+const productRoutes=require('./routes/productRoutes')
+app.use('/api/products',productRoutes);
+
 
 async function startServer(){
     try{
