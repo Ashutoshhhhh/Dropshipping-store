@@ -5,6 +5,8 @@ import Shop from '../components/Shop/Shop';
 import Categogypage from '../components/Categories/Categogypage';
 import Search from '../components/Search/Search';
 import Singleproduct from '../components/Shop/Singleproduct';
+import Login from '../components/Login/Login';
+import Register from '../components/Login/Register';
 const router =createBrowserRouter([
     {
         path: "/",
@@ -26,6 +28,14 @@ const router =createBrowserRouter([
             {path:"/shop/:id",element:<Singleproduct/>}
         ]
 
+    },
+    {
+        path:"/login",
+        element:<Login/>
+    },
+    {
+        path:"/register",
+        element:<Register/>
     }
 ]);
 
