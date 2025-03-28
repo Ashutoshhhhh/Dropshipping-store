@@ -5,6 +5,9 @@ const reviewModel = require('../models/reviewsModel')
 
 
 const createProduct = async (req, res) => {
+    if(req.role!=="admin"){
+        return res.status(400).json({message:'Only admin can create '})
+    }
     try {
         const newProduct = new productModel({ ...req.body });
         const savedProduct = await newProduct.save();
@@ -79,6 +82,83 @@ const getSingleProduct=async(req,res)=>{
 
 }
 
+const updateProduct = async(req,res)=>{
+    const {id}=req.params;
+    const role=req.role;
+    if(role!=="admin"){
+        return res.status(400).json({message:'Only admins can use this route'})
+    }
+    try{
+        const updatedProduct= await productModel.findByIdAndUpdate(id,{...req.body},{new: true});
+        if(!updatedProduct){
+            return res.status(404).json({message:'Product not found'});
+            
+        }
+        return res.status(200).json({message:`The product was updated ${updatedProduct}`})
+
+    }
+    catch(err){
+        return res.status(500).json({ message: `There was a backend error updating the error ${err.message}` });
+    }
+}
+
+const deleteProduct=async(req,res)=>{
+    const id=req.params.id;
+    const role=req.role;
+    if(role!=="admin"){
+        return res.status(400).json({message:'Only admins can use this route'});
+    }
+    try{
+        const deletedProduct= await productModel.findByIdAndDelete(id);
+        if(!deletedProduct){
+            return res.status(404).json({message:'The product does not exsists'});
+
+        }
+        //reviews delted
+        await reviewModel.deleteMany({productId:id});
+        return res.status(200).json({message:'Prouct delted successfully',deletedProduct})
+
+    }
+    catch(err){
+        Console.error("Error deleting the product")
+        return res.status(500).json({ message: `There was a backend error while deleting. the error ${err.message}` });
+    }
+}
+
+const relatedProduct=async(req,res)=>{
+    try{
+      const id =req.params.id;
+      if(!id){
+        return res.status(404).json({message:'No product id'});
+      }  
+      const product=await productModel.findById(id);
+      if(!product){
+        return res.status(404).json({message:'No product found'});
+      }
+      const titleRegex= new RegExp(
+        product.name
+        .split(" ")
+        .filter(word=>word.length>1)
+        .join("|"),
+        "i"
+      );
+      const relatedProducts=await productModel.find(
+        {
+            _id:{$ne:id},
+            $or:[
+                {name: {$regex:titleRegex}},
+                {category:product.category},
+                
+            ]
+        }
+      )
+      return res.status(200).json({relatedProducts});
+
+    }
+    catch(err){
+        return res.status(500).json({ message: `There was a backend error while fetching related product. the error ${err.message}` });
+    }
+}
 
 
 
@@ -90,7 +170,4 @@ const getSingleProduct=async(req,res)=>{
 
 
 
-
-
-
-module.exports = { createProduct, getProduct,getSingleProduct }
+module.exports = { createProduct, getProduct,getSingleProduct,updateProduct,deleteProduct,relatedProduct }
