@@ -39,7 +39,7 @@ const signIn=async(req,res)=>{
             secure:true,
             sameSite:'None'
         })
-        return res.status(200).json({message:'Logged in Successfully'});
+        return res.status(200).json({message:'Logged in Successfully',user:user,token:token});
     }
     catch(err){
         return res.status(500).json({message:'There was an server error',error:err.message})
