@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Shopfiltering = ({filters ,filteredState,setFilteredState, clearFilter}) => {
-    console.log(filters);
+    
     return (
     <div className='space-y-5 flex-shrink-0 '>
         <h3>Filters</h3>
