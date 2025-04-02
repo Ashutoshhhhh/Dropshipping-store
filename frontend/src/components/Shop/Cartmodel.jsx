@@ -1,7 +1,22 @@
 import React from 'react'
 import OrderSummary from './OrderSummary'
+import { useDispatch } from 'react-redux'
+import { removeFromCart, updateQuantity } from '../../redux/features/cart/cartSlice';
 
 const Cartmodel = ({ products, isOpen, onClose }) => {
+    const dispatch = useDispatch();
+    const handleQuantity = (type, id) => {
+        const payload = { type, id };
+        dispatch(updateQuantity(payload));
+
+    }
+
+    const removeFunction =(id)=>{
+        console.log(id);
+        const payload={id};
+        dispatch(removeFromCart(payload));
+
+    }
     return (
         <div className={`fixed z-[1000] inset-0 bg-black bg-opacity-80  transition-opacity
                     ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -9,7 +24,7 @@ const Cartmodel = ({ products, isOpen, onClose }) => {
             onClick={onClose}
             style={{ transition: 'opacity 300ms' }}
         >
-            <div className={`fixed right-0 top-0 md:w-1/3 w-full bg-white h-full overflow-y-auto
+            <div className={`fixed w-full right-0 top-0 md:w-1/3 bg-white h-full overflow-y-auto
                 ${isOpen ? 'translate-x-0 ease-in-out' : 'translate-x-full'}`}
                 onClick={(e) => e.stopPropagation()}>
                 <div className='p-4 mt-4'>
@@ -26,7 +41,7 @@ const Cartmodel = ({ products, isOpen, onClose }) => {
                         {
                             products.length === 0 ? <div>Your cart is empty</div>
                                 : products.map((product, index) => {
-                                    return (<div key={index} className='flex  w-fit space-y-3 flex-col md:flex-row md:items-center md:justify-between shadow-md md:p-5 p-2 mb-4'>
+                                    return (<div key={index} className='flex  w-full space-y-3 flex-col md:flex-row md:items-center md:justify-between shadow-md md:p-5 p-2 mb-4'>
                                         <div className='flex items-center'>
                                             <span className=' py-1 px-2 mr-4 bg-primary text-white rounded-full'>{String(index + 1).padStart(2, '0')}</span>
                                             <img src={product.image} alt='image' className='size-14 object-cover mr-4 ' />
@@ -35,11 +50,17 @@ const Cartmodel = ({ products, isOpen, onClose }) => {
                                                 <p className='text-gray-600 text-sm'>${Number(product.price).toFixed(2)}</p>
                                             </div>
                                             <div className='flex flex-row md:justify-start justify-end items-center mt-2 gap-2'>
-                                                <button className='size-6 flex items-center justify-center px-2 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white ml-8' >-</button>
+                                                <button
+                                                    onClick={() => { handleQuantity('decrement', product._id) }}
+                                                    className='size-6 flex items-center justify-center px-2 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white ml-8' >-</button>
                                                 <span className='px-2 text-center mx-1'>{product.quantity}</span>
-                                                <button className='size-6 flex items-center justify-center px-2 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white '>+</button>
+                                                <button
+                                                    onClick={() => { handleQuantity('increment', product._id) }}
+                                                    className='size-6 flex items-center justify-center px-2 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white '>+</button>
                                                 <div className='ml-5 flex justify-end'>
-                                                    <button className='bg-red-500 hover:bg-red-700 text-white px-2 py-2 rounded-lg'>Remove</button>
+                                                    <button
+                                                    onClick={()=>removeFunction(product._id)}
+                                                    className='bg-red-500 hover:bg-red-700 text-white px-2 py-2 rounded-lg'>Remove</button>
 
                                                 </div>
                                             </div>
@@ -51,7 +72,7 @@ const Cartmodel = ({ products, isOpen, onClose }) => {
                         }
                     </div>
                     {
-                        products.length>0 && (
+                        products.length > 0 && (
                             <OrderSummary />
                         )
                     }
