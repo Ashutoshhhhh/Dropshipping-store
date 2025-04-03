@@ -43,7 +43,7 @@ export const authApi = createApi({
                 method:"POST",
                 body:userId
             }),
-            invalidatesTags:["Users"]
+            invalidatesTags:["User"]
         }),
         editProfile: builder.mutation({
             query:(profileData)=>({

@@ -11,7 +11,7 @@ const Login = () => {
     const [loginUser,states] = useLoginUserMutation();
     const navigate=useNavigate();
     const dispatch= useDispatch()
-    
+    console.log(states);
     const handlelogin = async (e) => {
         
         e.preventDefault();
