@@ -55,7 +55,7 @@ const Navbar = () => {
     const dropDownMenu = user?.role === 'admin' ? [...admindropDownMenu] : [...userdropDownMenu];
     console.log(dropDownMenu);
     return (
-        <header className='fixed-nav-bar w-nav'>
+        <header className='fixed-nav-bar w-nav overflow-x-hidden'>
             <nav className='max-w-screen-2xl mx-auto px-4 flex justify-between items-center'>
                 <ul className='nav__links'>
                     <li> <NavLink className={({ isActive }) => isActive ? 'text-primary font-bold' : 'text-black hover:text-primary'} to="/">Home</NavLink> </li>

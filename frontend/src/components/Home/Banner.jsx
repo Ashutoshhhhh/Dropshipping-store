@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import header from '../../assets/header.png'
 const Banner = () => {
   return (
-    <div className='section__container header__container'>
+    <div className='section__container header__container overflow-x-hidden'>
         <div className='header__content z-30 sm:text-white'>
             <h4 className='uppercase'>Up To 20% Discount on</h4>
             <h1>Girl's Fashion</h1>

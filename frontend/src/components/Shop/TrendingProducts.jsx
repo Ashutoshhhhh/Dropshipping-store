@@ -8,7 +8,7 @@ const TrendingProducts = () => {
         setVisibleProducts(prev=>prev+4);
     }
   return (
-    <section className='section__container product__container'>
+    <section className='section__container product__container overflow-x-hidden'>
         <h2 className='section__header'>Trending Products</h2>
         <p className='section__subheader '>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam itaque incidunt ipsum atque at aliquid ipsam accusantium, aut suscipit eni</p>
 

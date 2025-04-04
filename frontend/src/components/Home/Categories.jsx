@@ -12,7 +12,7 @@ const Categories = () => {
         {name:'Cosmetics', path:'cosmetics', image:category4 }
     ]
   return (
-    <div className='product__grid '>
+    <div className='product__grid overflow-x-hidden'>
       {
         categories.map((category,index)=>{
             return <Link key={index} className='categories__card  hover:scale-110 transition-all duration-200'

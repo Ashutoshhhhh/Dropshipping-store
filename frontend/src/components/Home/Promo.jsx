@@ -2,7 +2,7 @@ import React from 'react'
 
 const Promo = () => {
   return (
-    <div className='section__container banner__container'>
+    <div className='section__container banner__container overflow-x-hidden'>
         <div className='banner__card'>
             <span><i className="ri-truck-line"></i></span>
             <h4>Free Delivery</h4>

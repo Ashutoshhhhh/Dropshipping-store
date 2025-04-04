@@ -2,7 +2,7 @@ import React from 'react'
 import deals from '../../assets/deals.png'
 const DealsSection = () => {
   return (
-    <div className='section__container deals__container'>
+    <div className='section__container deals__container overflow-x-hidden'>
         <div className='deals__image'>
             <img src={deals} alt='deals-image' className='z-8 w-fit h-fit'/>
         </div>

@@ -44,10 +44,18 @@ const Cartmodel = ({ products, isOpen, onClose }) => {
                                     return (<div key={index} className='flex  w-full space-y-3 flex-col md:flex-row md:items-center md:justify-between shadow-md md:p-5 p-2 mb-4'>
                                         <div className='flex items-center'>
                                             <span className=' py-1 px-2 mr-4 bg-primary text-white rounded-full'>{String(index + 1).padStart(2, '0')}</span>
+                                            
+                                            <div className='mt-5 '>
                                             <img src={product.image} alt='image' className='size-14 object-cover mr-4 ' />
+                                                    <button
+                                                    onClick={()=>removeFunction(product._id)}
+                                                    className=' text-red-500 mt-3 -translate-x-1 rounded-lg'>Remove</button>
+
+                                                </div>
                                             <div>
                                                 <h5 className='text-lg font-medium'>{product.name}</h5>
                                                 <p className='text-gray-600 text-sm'>${Number(product.price).toFixed(2)}</p>
+                                                
                                             </div>
                                             <div className='flex flex-row md:justify-start justify-end items-center mt-2 gap-2'>
                                                 <button
@@ -57,12 +65,7 @@ const Cartmodel = ({ products, isOpen, onClose }) => {
                                                 <button
                                                     onClick={() => { handleQuantity('increment', product._id) }}
                                                     className='size-6 flex items-center justify-center px-2 rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white '>+</button>
-                                                <div className='ml-5 flex justify-end'>
-                                                    <button
-                                                    onClick={()=>removeFunction(product._id)}
-                                                    className='bg-red-500 hover:bg-red-700 text-white px-2 py-2 rounded-lg'>Remove</button>
-
-                                                </div>
+                                                
                                             </div>
                                         </div>
 

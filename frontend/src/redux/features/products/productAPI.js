@@ -6,23 +6,23 @@ import { getBaseUrl } from '../../../utils/baseURL'
 export const productsAPI= createApi({
     reducerPath:'productsAPI',
     baseQuery: fetchBaseQuery({
-        baseURL: `${getBaseUrl()}/api/products`,
+        baseUrl: `${getBaseUrl()}/api/products` ,
         credentials: 'include'
     }),
     endpoints:(builder)=>({
         fetchAllProducts: builder.query({
-            query:({category, color, minprice, maxprice, page = 1, limit = 10})=>{
+            query:({category, color, minPrice, maxPrice, page = 1, limit = 10})=>{
                 const queryParams = new URLSearchParams({
                     category: category || "",
                     color: color || "",
-                    minprice: minprice || 0,
-                    maxprice: maxprice || '',
+                    minPrice: minPrice || 0,
+                    maxPrice: maxPrice || '',
                     page:page.toString(),
                     limit: limit.toString(),
 
 
                 }).toString();
-                return `/${queryParams}`
+                return `/getproducts?${queryParams}`
             },
             providesTags:['Products']
         }),

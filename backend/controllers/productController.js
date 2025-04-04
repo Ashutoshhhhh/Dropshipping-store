@@ -28,7 +28,7 @@ const createProduct = async (req, res) => {
 
 const getProduct = async (req,res) => {
     try {
-        const { category, color, minprice, maxprice, page = 1, limit = 10 } = req.query;
+        const { category, color, minPrice, maxPrice, page = 1, limit = 10 } = req.query;
         let filter = {};
         if (category && category !== 'all') {
             filter.category = category;
@@ -36,10 +36,10 @@ const getProduct = async (req,res) => {
         if (color && color !== 'all') {
             filter.color = color;
         }
-        if(minprice || maxprice){
+        if(minPrice || maxPrice){
             filter.price={};
-            const min=parseFloat(minprice);
-            const max=parseFloat(maxprice);
+            const min=parseFloat(minPrice);
+            const max=parseFloat(maxPrice);
             if(!isNaN(min)){
                 
                 filter.price.$gte=min;

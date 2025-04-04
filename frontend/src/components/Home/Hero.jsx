@@ -26,7 +26,7 @@ const cards=[
 ]
 const Hero = () => {
   return (
-    <div className='section__container hero__container '>
+    <div className='section__container hero__container overflow-x-hidden '>
       {
         cards.map((card,index)=>{
           return <div key={index} className='hero__card'>
