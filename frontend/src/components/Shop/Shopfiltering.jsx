@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Shopfiltering = ({filters ,filteredState,setFilteredState, clearFilter}) => {
+const Shopfiltering = ({filters ,filteredState,setFilteredState, clearFilter,setCurrentPage}) => {
     
     return (
     <div className='space-y-5 flex-shrink-0 w-[200px]'>
@@ -19,7 +19,9 @@ const Shopfiltering = ({filters ,filteredState,setFilteredState, clearFilter}) =
                         id='category'
                         value={category}
                         checked={filteredState.category===category}
-                        onChange={(e)=>setFilteredState({...filteredState, category: e.target.value})}/>
+                        onChange={(e)=>{
+                            setCurrentPage(1);
+                            setFilteredState({...filteredState, category: e.target.value})}}/>
                         <span className='ml-1'>{category}</span>
 
                     </label>

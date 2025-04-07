@@ -29,7 +29,8 @@ const adminRoutes=require('./routes/adminRoutes')
 app.use('/api/admin',adminRoutes);
 const productRoutes=require('./routes/productRoutes')
 app.use('/api/products',productRoutes);
-
+const reviewRoutes=require('./routes/reviewRoutes');
+app.use('/api/review',reviewRoutes);
 
 async function startServer(){
     try{

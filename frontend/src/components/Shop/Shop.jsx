@@ -49,15 +49,15 @@ const Shop = () => {
       priceRange: ''
     })
   }
- const startProduct = (currentPage-1)* productperpage + 1;
- const endProduct = startProduct + products.length -1;
+  const startProduct = (currentPage - 1) * productperpage + 1;
+  const endProduct = startProduct + products.length - 1;
 
-function handlePagination(page){
-    if(page>0 && page<=totalPages){
+  function handlePagination(page) {
+    if (page > 0 && page <= totalPages) {
       setCurrentPage(page)
 
     }
-}
+  }
 
   return (
     <>
@@ -71,6 +71,7 @@ function handlePagination(page){
           {/* left */}
           <div>
             <Shopfiltering
+              setCurrentPage={setCurrentPage}
               filters={filters}
               filteredState={filteredState}
               setFilteredState={setFilteredState}
@@ -83,19 +84,19 @@ function handlePagination(page){
             {/* pagination control */}
 
             <div className='mt-6 flex justify-center'>
-              <button 
-              onClick={()=>handlePagination(currentPage-1)}
-              className={`px-4 py-2 ${currentPage===1?'hidden':'flex'} bg-gray-300 text-gray-700 rounded-md mr-2` }>Prev</button>
+              <button
+                onClick={() => handlePagination(currentPage - 1)}
+                className={`px-4 py-2 ${currentPage === 1 ? 'hidden' : 'flex'} bg-gray-300 text-gray-700 rounded-md mr-2`}>Prev</button>
               {
-                [...Array(totalPages)].map((_,index)=>{
-                  return <button key={index} 
-                  onClick={()=>handlePagination(index+1)}
-                  className={`px-4 py-2 rounded-md mx-1 ${index+1>currentPage+2?'hidden':'flex'} ${currentPage===index+1?'bg-blue-500 text-white':'bg-gray-300 text-gray-700'}`}> {index+1}</button>
+                [...Array(totalPages)].map((_, index) => {
+                  return <button key={index}
+                    onClick={() => handlePagination(index + 1)}
+                    className={`px-4 py-2 rounded-md mx-1 ${index + 1 > currentPage + 2 ? 'hidden' : 'flex'} ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}> {index + 1}</button>
                 })
               }
-              <button 
-              onClick={()=>handlePagination(currentPage+1)}
-              className={`px-4 py-2 bg-gray-300 text-gray-700 rounded-md ml-2 ${currentPage===totalPages?'hidden':'flex'} `}>Next</button>
+              <button
+                onClick={() => handlePagination(currentPage + 1)}
+                className={`px-4 py-2 bg-gray-300 text-gray-700 rounded-md ml-2 ${currentPage === totalPages ? 'hidden' : 'flex'} `}>Next</button>
 
             </div>
           </div>
